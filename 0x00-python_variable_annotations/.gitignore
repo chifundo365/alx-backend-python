@@ -2,3 +2,4 @@
 .*.swp
 __py*
 *-main.py
+exec.sh
