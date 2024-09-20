@@ -6,7 +6,7 @@ from typing import Mapping, Sequence, Union, Dict, Any
 from utils import access_nested_map
 
 
-class TestAccsesNestedMap(unittest.TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     """ Run dedicated tests """
     @parameterized.expand(
             [
