@@ -18,8 +18,24 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map(
             self, nested_map: Mapping, path: Sequence, expected: Any
             ) -> None:
-        """ tests with different paramiterised input """
+        """ tests with the right paramiterised inputs  and expected output"""
         self.assertEqual(access_nested_map(nested_map, path), expected)
+
+    @parameterized.expand(
+            [
+                ({}, ("a",), KeyError, 'a'),
+                ({"a": 1}, ("a", "b"), KeyError, 'b')
+            ])
+    def test_acces_mested_map_exception(
+            self,
+            nested_map: Mapping[str, Any],
+            path: Sequence[str],
+            expected: Any,
+            error_key: str
+            ):
+        with self.assertRaises(expected) as context:
+            access_nested_map(nested_map, path)
+        self.assertEqual(context.exception.args[0], str(error_key))
 
 
 if __name__ == "__main__":
