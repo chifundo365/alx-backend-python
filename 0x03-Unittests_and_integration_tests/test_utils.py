@@ -33,6 +33,7 @@ class TestAccessNestedMap(unittest.TestCase):
             path: Sequence[str],
             expected: Any,
             ):
+        ''' tests for exceptions for  the access_nested_map method '''
         with self.assertRaises(expected) as context:
             access_nested_map(nested_map, path)
 
@@ -59,6 +60,7 @@ class TestMemoize(unittest.TestCase):
     def test_memoize(self):
         ''' tests for the memoize method '''
         class TestClass:
+            ''' test class '''
 
             def a_method(self):
                 ''' a_ method returns 42 '''
