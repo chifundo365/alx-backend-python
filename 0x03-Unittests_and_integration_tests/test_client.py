@@ -6,7 +6,6 @@ from parameterized import parameterized
 import client
 
 
-
 class TestGithubOrgClient(unittest.TestCase):
     ''' Test class for the GithubOrgClient '''
 
@@ -19,7 +18,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_org(self, org, mock):
         ''' Self descriptive '''
-        endpoint =  'https://api.github.com/orgs/{}'.format(org)
+        endpoint = 'https://api.github.com/orgs/{}'.format(org)
         spec = client.GithubOrgClient(org)
         spec.org()
         mock.assert_called_once_with(endpoint)
@@ -43,10 +42,10 @@ class TestGithubOrgClient(unittest.TestCase):
         payload = [{'name': 'Google'}, {'name': 'Apple'}]
         mock_get_json.return_value = payload
 
-        with patch('client.GithubOrgClient._public_repos_url',
-                  new_callable=PropertyMock
-                  ) as mocked_public:
-            
+        with patch(
+                'client.GithubOrgClient._public_repos_url',
+                new_callable=PropertyMock
+                ) as mocked_public:
             mocked_public.return_value = 'https://world.com'
             res = client.GithubOrgClient('name').public_repos()
 
