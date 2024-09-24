@@ -69,9 +69,8 @@ class TestGithubOrgClient(unittest.TestCase):
         'expected_repos', 'apache2_repos'],
         TEST_PAYLOAD
         )
-class TestIntergrationGithubOrgClient(unittest.TestCase):
+class TestIntegrationGithubOrgClient(unittest.TestCase):
     ''' Intergration testing on GithubClient.public_repos method '''
-
     @classmethod
     def setUpClass(cls):
         ''' Setup method '''
