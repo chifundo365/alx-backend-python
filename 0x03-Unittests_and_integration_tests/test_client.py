@@ -2,8 +2,9 @@
 ''' Tests an API '''
 import unittest
 from unittest.mock import patch, PropertyMock
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 import client
+from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -61,6 +62,34 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_has_license(self, repo, license_key, expected_result):
         result = client.GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected_result)
+
+
+@parameterized_class([
+        'org_payload', 'repos_payload',
+        'expected_repos', 'apache2_repos'],
+        TEST_PAYLOAD
+        )
+class TestIntergrationGithubOrgClient(unittest.TestCase):
+    ''' Intergration testing on GithubClient.public_repos method '''
+
+    @classmethod
+    def setUpClass(cls):
+        ''' Setup method '''
+        cls.get_patcher = patch('requests.get', side_effect=[
+            cls.org_payload, cls.repos_payload
+            ])
+        cls.mocked_get = cls.get_patcher.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        ''' tearDown method '''
+        cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        ''' test public repos '''
+
+    def test_public_repos_with_license(self):
+        ''' test public repo with license '''
 
 
 if __name__ == "__main__":
