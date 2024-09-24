@@ -7,7 +7,7 @@ import client
 
 
 
-class TestGithubOrg(unittest.TestCase):
+class TestGithubOrgClient(unittest.TestCase):
     ''' Test class for the GithubOrgClient '''
 
     @parameterized.expand(
